@@ -9,19 +9,30 @@
   <title>my portfolio</title>
 
   <!--
-    - custom js link (moved to head and loaded first for path handling)
+    - Inline script for immediate path handling
+  -->
+  <script>
+    (function() {
+      var pathPrefix = window.location.hostname === 'anshulai.github.io' ? '/my-protfolio-website-' : '';
+      function fixPath(path) { return (pathPrefix + '/' + path).replace(/\/+/g, '/'); }
+      window.getAssetPath = fixPath;
+    })();
+  </script>
+
+  <!--
+    - custom js link for main functionality
   -->
   <script src="assets/js/script.js"></script>
 
   <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="assets/images/logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/logo.ico" type="image/x-icon" onerror="this.href = window.getAssetPath(this.getAttribute('href'))">
 
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css" onerror="this.href = window.getAssetPath(this.getAttribute('href'))">
 
   <!--
     - google font link
@@ -48,7 +59,7 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="assets/images/my-avatar.png" alt="Anshul Kumar Singh" width="80">
+          <img src="assets/images/my-avatar.png" alt="Anshul Kumar Singh" width="80" onerror="this.src = window.getAssetPath(this.getAttribute('src'))">
         </figure>
 
         <div class="info-content">
@@ -56,7 +67,7 @@
 
           <p class="title">Software Developer</p>
 
-          <a href="assets/cv/Anshul_Kumar_Singh_CV.pdf" class="cv-btn" download>
+          <a href="assets/cv/Anshul_Kumar_Singh_CV.pdf" class="cv-btn" download onerror="this.href = window.getAssetPath(this.getAttribute('href'))">
             <ion-icon name="download-outline"></ion-icon>
             <span>Download CV</span>
           </a>
@@ -187,7 +198,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="assets/images/icon-design.svg" alt="design icon" width="40">
+                <img src="assets/images/icon-design.svg" alt="design icon" width="40" onerror="this.src = window.getAssetPath(this.getAttribute('src'))">
               </div>
 
               <div class="service-content-box">
@@ -203,7 +214,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="assets/images/icon-dev.svg" alt="Web development icon" width="40">
+                <img src="assets/images/icon-dev.svg" alt="Web development icon" width="40" onerror="this.src = window.getAssetPath(this.getAttribute('src'))">
               </div>
 
               <div class="service-content-box">
