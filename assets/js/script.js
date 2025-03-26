@@ -1,39 +1,3 @@
-// Add path prefix handling for GitHub Pages
-const pathPrefix = window.location.hostname === 'anshulai.github.io' ? '/my-protfolio-website-' : '';
-
-// Function to fix asset paths
-function getAssetPath(path) {
-  return `${pathPrefix}/${path}`.replace(/\/+/g, '/');
-}
-
-// Update all asset paths
-document.addEventListener('DOMContentLoaded', () => {
-  // Handle images
-  document.querySelectorAll('img[src^="assets/"]').forEach(img => {
-    img.src = getAssetPath(img.getAttribute('src'));
-  });
-
-  // Handle CSS files
-  document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-    if (link.href.includes('assets/')) {
-      link.href = getAssetPath(link.getAttribute('href'));
-    }
-  });
-
-  // Handle favicons
-  document.querySelectorAll('link[rel="shortcut icon"]').forEach(link => {
-    if (link.href.includes('assets/')) {
-      link.href = getAssetPath(link.getAttribute('href'));
-    }
-  });
-
-  // Handle other resources
-  document.querySelectorAll('a[href^="assets/"]').forEach(link => {
-    link.href = getAssetPath(link.getAttribute('href'));
-  });
-});
-
-// Rest of your original script.js content below
 'use strict';
 
 // element toggle function
