@@ -14,23 +14,23 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-    // Find the matching page
-    const pageId = this.innerHTML.toLowerCase();
+// add event to all nav links
+navigationLinks.forEach(link => {
+  link.addEventListener("click", function () {
+    const targetSection = this.textContent.toLowerCase();
     
     // Remove active class from all pages and links
-    for (let i = 0; i < pages.length; i++) {
-      if (pages[i].dataset.page === pageId) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
+    navigationLinks.forEach(link => link.classList.remove("active"));
+    pages.forEach(page => page.classList.remove("active"));
+    
+    // Add active class to current link
+    this.classList.add("active");
+    
+    // Show the matching page
+    const targetPage = document.querySelector(`[data-page="${targetSection}"]`);
+    if (targetPage) {
+      targetPage.classList.add("active");
+      window.scrollTo(0, 0);
     }
-
-    window.scrollTo(0, 0);
   });
-}
+});
