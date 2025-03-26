@@ -17,19 +17,20 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-    // Remove 'active' class from all pages first
-    pages.forEach(page => page.classList.remove("active"));
-    navigationLinks.forEach(link => link.classList.remove("active"));
-
-    // Add 'active' class to the clicked button
-    this.classList.add("active");
-
-    // Find and activate the corresponding page
-    const buttonText = this.innerHTML.toLowerCase().trim();
-    const targetPage = document.querySelector(`[data-page="${buttonText}"]`);
-    if (targetPage) {
-      targetPage.classList.add("active");
-      window.scrollTo(0, 0);
+    // Find the matching page
+    const pageId = this.innerHTML.toLowerCase();
+    
+    // Remove active class from all pages and links
+    for (let i = 0; i < pages.length; i++) {
+      if (pages[i].dataset.page === pageId) {
+        pages[i].classList.add("active");
+        navigationLinks[i].classList.add("active");
+      } else {
+        pages[i].classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
     }
+
+    window.scrollTo(0, 0);
   });
 }
